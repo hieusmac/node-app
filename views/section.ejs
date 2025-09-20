@@ -1,30 +1,43 @@
-<article class="flex flex-col items-start justify-between max-w-xl ring-1 ring-gray-300 dark:ring-gray-700 rounded-2xl p-4">
-    <div class="flex items-center gap-x-4 text-xs">
-        <time class="text-gray-800 dark:text-gray-400" datetime="<%= new Date().toISOString() %>">
-            <%= new Date().toLocaleDateString("en-AU", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                weekday: "short",
-            }) %>
-        </time>
-    </div>
-    <div class="group relative grow">
-        <h3 class="mt-3 text-lg/6 font-semibold bg-gray-50 dark:bg-gray-900 dark:text-white group-hover:text-gray-800 group-hover:dark:text-gray-400">
-            <%= blogTitle %>
-        </h3>
-        <p class="mt-5 line-clamp-3 text-sm text-gray-800 dark:text-gray-400"> <%= blogText %> </p>
-    </div>
-    <div class="relative mt-8 flex items-center gap-x-4 justify-self-end">
-        <img src="eye-with-futuristic-digital-iris.jpg" alt="" class="size-10 rounded-full bg-gray-800" />
-        <div class="text-sm/6">
-            <p class="font-semibold text-black dark:text-white">
-                <a href="#">
-                    <span class="absolute inset-0"></span>
-                    Hieu Joestar
-                </a>
-            </p>
-            <p class="text-gray-800 dark:text-gray-400">Founder</p>
-        </div>
-    </div>
-</article>
+<% blogLists.forEach((item, index) => { %>
+    <% let blogTitle = item.title; %>
+    <% let blogText = item.text; %>
+    <% let postingTime = item.postingTime %>
+    <% if (blogTitle) { %>
+        <article class="grid grid-cols-2 items-start justify-between max-w-xl ring-1 ring-gray-300 dark:ring-gray-700 rounded-2xl p-4">
+            <div class="flex items-center gap-x-4 text-xs">
+                <time class="text-gray-800 dark:text-gray-400" datetime="<%= new Date().toISOString() %>">
+                   <%= postingTime %>
+                </time>
+            </div>
+            <div class="flex justify-self-end">
+                <form class="p-y-0">
+                    <button type="submit" formaction="/delete" formmethod="post">
+                        <svg viewBox="0 0 24 24" class="size-4 fill-none stroke-current dark:stroke-amber-50 hover:stroke-current/10 dark:hover:stork-amber:100 stroke-1" aria-hidden="true">
+                            <path d="M 6 18 L 18 6 M 6 6 L 18 18" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <input type="hidden" name="delIndex" value=<%= index %>>
+                </form>
+            </div>
+            <div class="col-span-2 group relative grow">
+                <h3 class="mt-3 text-lg/6 font-semibold dark:bg-gray-900 dark:text-white group-hover:text-gray-800 group-hover:dark:text-gray-400">
+                    <%= blogTitle %>
+                </h3>
+                <p class="mt-5 line-clamp-3 text-sm text-gray-800 dark:text-gray-400"> <%= blogText %> </p>
+            </div>
+            <div class="relative mt-8 flex items-center gap-x-4 col-span-2">
+                <img src="eye-with-futuristic-digital-iris.jpg" alt="" class="size-10 rounded-full bg-gray-800" />
+                <div class="text-sm/6">
+                    <p class="font-semibold text-black dark:text-white">
+                        <a href="/about">
+                            <span class="absolute inset-0"></span>
+                            Hieu Joestar
+                        </a>
+                    </p>
+                    <p class="text-gray-800 dark:text-gray-400">Founder</p>
+                </div>
+            </div>
+        </article>
+    <% } %>
+<% }) %>
+

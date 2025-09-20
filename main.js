@@ -18,6 +18,15 @@ app.get("/about", (req, res) => {
     res.render("about.ejs")
 })
 
+app.get("/post", (req, res) => {
+    res.render("post.ejs", {blogTitle: "Blog", blogText: "Hello"})
+})
+
+app.post("/submit", (req, res) => {
+    console.log(req.body)
+    res.redirect("/post");
+})
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 })

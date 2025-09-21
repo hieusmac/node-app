@@ -1,10 +1,10 @@
 <% blogLists.forEach((item, index) => { %>
     <% let blogTitle = item.title; %>
-    <% let blogText = item.text; %>
+    <% let blogText = " " ? item.text: item.text; %>
     <% let postingTime = item.postingTime %>
     <% if (blogTitle) { %>
-        <article class="grid grid-cols-2 items-start justify-between max-w-xl ring-1 ring-gray-300 dark:ring-gray-700 rounded-2xl p-4">
-            <div class="flex items-center gap-x-4 text-xs">
+        <article class="grid grid-cols-3 sm:grid-cols-2 items-start justify-between max-w-xl ring-1 ring-gray-300 dark:ring-gray-700 rounded-2xl p-4">
+            <div class="col-span-2 sm:col-span-1 flex items-center gap-x-4 text-xs">
                 <time class="text-gray-800 dark:text-gray-400" datetime="<%= new Date().toISOString() %>">
                    <%= postingTime %>
                 </time>
@@ -19,14 +19,24 @@
                     <input type="hidden" name="delIndex" value=<%= index %>>
                 </form>
             </div>
-            <div class="col-span-2 group relative grow">
-                <h3 class="mt-3 text-lg/6 font-semibold dark:bg-gray-900 dark:text-white group-hover:text-gray-800 group-hover:dark:text-gray-400">
+            <div class="col-span-2 group grow relative inline-block ">
+                <div id="pop<%= index %>" class="hidden absolute z-10 mt-10 ml-10 p-4 max-w-xl skew-3 bg-white ring-1 ring-gray-300 dark:ring-gray-700">
+                    <form action="/post/edit" method="POST" class="flex flex-col gap-2">
+                        <span class="text-xs">Edit Title: <input class="px-2" type="text" name="renameTitle"></span>
+                        <span class="text-xs">Edit Post: <input class="px-2" type="text" name="rewriteContent"></span>
+                        <input type="hidden" name="listIndex" value="<%= index %>">
+                        <input class="text-xs" type="submit" value="Submit">
+                    </form>
+                </div>
+                <button type="button" onclick="$(`#pop<%= index %>`).toggleClass('hidden')" class="text-lg/6 text-start font-semibold text-gray-600 dark:text-gray-100 hover:text-gray-400 hover:dark:text-gray-50">
                     <%= blogTitle %>
-                </h3>
-                <p class="mt-5 line-clamp-3 text-sm text-gray-800 dark:text-gray-400"> <%= blogText %> </p>
+                </button>
             </div>
-            <div class="relative mt-8 flex items-center gap-x-4 col-span-2">
-                <img src="eye-with-futuristic-digital-iris.jpg" alt="" class="size-10 rounded-full bg-gray-800" />
+            <div class="col-span-3 sm:col-span-2 group relative grow mt-3">
+                <p class="line-clamp-3 text-sm text-gray-800 dark:text-gray-400"> <%= blogText %> </p>
+            </div>
+            <div class="relative mt-8 flex items-center gap-x-4 col-span-3 sm:col-span-2">
+                <img src="/public/assets/eye-with-futuristic-digital-iris.jpg" alt="" class="size-10 rounded-full bg-gray-800" />
                 <div class="text-sm/6">
                     <p class="font-semibold text-black dark:text-white">
                         <a href="/about">

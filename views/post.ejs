@@ -9,8 +9,8 @@
             </div>
             <div class="basis-2/3 flex justify-center">
                 <form action="/submit" method="POST">
-                    <label class="grid grid-cols-3 gap-4 h-28 sm:h-16 w-32 sm:w-96">
-                        <input type="submit" value="Post" class="text-gray-100 self-start bg-blue-500 rounded-3xl text-center">
+                    <label class="grid grid-cols-3 gap-1 sm:gap-4 h-28 sm:h-16 w-32 sm:w-96">
+                        <input type="submit" value="Post" class="text-gray-100 self-start bg-blue-500 rounded-3xl text-center py-2 sm:py-1">
                         <input type="text" name="blogTitle" value="Untitled" class="text-gray-600 dark:text-white outline-1 outline-gray-400 rounded-3xl text-center col-span-2">
                         <input type="text" name="blogText" placeholder="Sending post" class="col-span-3 row-span-5 text-center text-gray-600 dark:text-white  rounded-3xl outline-1 outline-gray-400">
                     </label>
@@ -23,6 +23,4 @@
     </div>
 </div>
 
-</div>
-</body>
-</html>
+<%- include("footer.ejs") %>
